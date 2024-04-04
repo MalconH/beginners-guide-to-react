@@ -1,0 +1,76 @@
+<body>
+  <div id="root"></div>
+
+  <!-- Loading React from unpkg's CDN -->
+  <!-- React allows to create React-elements -->
+  <script src="https://unpkg.com/react@16.7.0/umd/react.production.min.js"></script>
+  <!-- React-DOM allows to render React-elements in the page -->
+  <script src="https://unpkg.com/react-dom@16.7.0/umd/react-dom.production.min.js"></script>
+
+  <script type="text/javascript">
+    const $root = document.querySelector("#root");
+
+    // Create element with React
+    const $element = React.createElement(
+      "div",
+      {
+        // instead of textContent, we pass the text as children.
+        // You can even pass an array of String to append multiple children
+        children: ["Hello World", ", Goodbye World"],
+        className: "container"
+      }
+    );
+    console.log($element);
+
+    // Add the element to the DOM
+    ReactDOM.render($element, $root);
+
+
+
+    /* Further examples */
+    // 1. When creating a react-element you can also do smth like this
+    const example1 = React.createElement(
+      "div",
+      {
+        children: "Hello World",
+        className: "container"
+      }
+    );
+
+    // 2. Or like this
+    const example2 = React.createElement(
+      "div",
+      {
+        className: "container"
+      },
+      "Hello World"
+    );
+
+    // 3. Or add as many children as argument as you want
+    const example3 = React.createElement(
+      "div",
+      {
+        className: "container"
+      },
+      "Hello World", ", Goodbye World"
+    );
+
+    ReactDOM.render(example1, $root);
+    ReactDOM.render(example2, $root);
+    // IMPORTANT!: Only this will render because is overwriting the one's before
+    // Try commenting this 👇🏻 and see what happens
+    ReactDOM.render(example3, $root);
+
+    // 4. You can even pass as children a new React-element
+    const example4 = React.createElement(
+      "div",
+      {
+        children: React.createElement("span", null, "Hello ", "World")
+        // Null bc we don't wanna pass it any options
+      }
+    );
+    ReactDOM.render(example4, $root); // <div> <span> Hello World </span> </div>
+
+
+  </script>
+</body>

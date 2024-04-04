@@ -1,0 +1,60 @@
+<body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+  <script src="https://unpkg.com/react-error-boundary@1.2.5/dist/umd/react-error-boundary.js"></script>
+  <script type="text/babel">
+    /* // Create class component
+    class ErrorBoundary extends React.Component {
+      // Obtain error and asign to component state
+      state = { error: null };
+      static getDerivedStateFromError(error) {
+        return { error };
+      }
+
+      // This is going to be rendered in case of thrown error
+      render() {
+        const { error } = this.state; // Destructuring assignment
+        if (error) {
+          // this.props.FallbackComponent references to ErrorFallback (passed in ErrorBoundary Component
+          return <this.props.FallbackComponent error={error} />;
+        }
+
+        // If no error catched, return the children we provide it
+        return this.props.children;
+      }
+    } */
+
+    const ErrorBoundary = ReactErrorBoundary.ErrorBoundary;
+
+    // Using a component as Fallback
+    function ErrorFallback({ error }) {
+      return (
+        <div>
+          <p>Ups... something went wrong... so--sowy...</p>
+          <pre>{error.message}</pre>
+        </div>
+      );
+    }
+
+    function Bomb() {
+      throw new Error("💥 CABOOM 💥");
+    }
+
+    function App() {
+      const [explode, setExplode] = React.useState(false);
+      return (
+        <div>
+          <div>
+            <button onClick={() => setExplode(true)}>💣</button>
+          </div>
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <div>{explode ? <Bomb /> : "Push the button Max!"}</div>
+          </ErrorBoundary>
+        </div>
+      );
+    }
+    ReactDOM.render(<App />, document.getElementById("root"));
+  </script>
+</body>

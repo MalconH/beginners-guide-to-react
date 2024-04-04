@@ -1,0 +1,17 @@
+<body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+  <script type="text/babel">
+    const rootElement = document.getElementById('root');
+
+    // React interpolation with {}
+    const className = "container";
+    const children = "Hello World";
+    const id = "app-root";
+    const props = { className, children };
+    const element = <div id={id} {...props} />;;
+    ReactDOM.render(element, rootElement)
+  </script>
+</body>

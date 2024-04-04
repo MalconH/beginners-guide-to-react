@@ -1,0 +1,51 @@
+<body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+  <script type="text/babel">
+    const root = document.querySelector("#root");
+
+    // Using JavaScript syntaxis
+    const helloElement = React.createElement("span", null, "Hello");
+    const worldElement = React.createElement("span", null, "World");
+    const element = React.createElement(
+      React.Fragment,
+      null,
+      helloElement,
+      worldElement,
+      "Goodbye"
+    );
+
+    // Using jsx
+    const element2 =
+      <React.Fragment>
+        <span>Hello</span>
+        <span>World</span>
+      </React.Fragment>;
+
+    // We can remove React.Fragment and leave empty <>
+    const element3 =
+      <>
+        <span>Hello</span>
+        <span>World</span>
+      </>;
+
+    // Nesting a react.fragment inside another one (useless) 
+    const element4 =
+      <>
+        <div>
+          <>
+            <span children="Foo" />
+            <span children="Bar" />
+          </>
+        </div>
+        <div children="Foobar" />
+      </>;
+
+    ReactDOM.render(element, root);
+    ReactDOM.render(element2, root);
+    ReactDOM.render(element3, root);
+    ReactDOM.render(element4, root);
+  </script>
+</body>
